@@ -465,6 +465,255 @@ button {
   outline-offset: 2px;
 }
 
+
+.results-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-button {
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.review-view {
+  width: 100%;
+  min-width: 0;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.review-heading {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.review-summary-line {
+  margin-bottom: 24px;
+  color: var(--pwc-grey-900);
+  font-size: 16px;
+}
+
+.review-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter-button {
+  min-height: 44px;
+  padding: 8px 16px;
+  color: var(--pwc-grey-900);
+  background: var(--pwc-white);
+  border: 1px solid var(--pwc-grey-200);
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.filter-button:hover {
+  border-color: var(--pwc-orange);
+}
+
+.filter-button:focus-visible {
+  outline: 2px solid var(--pwc-orange);
+  outline-offset: 2px;
+}
+
+.filter-button-active {
+  color: var(--pwc-white);
+  background: var(--pwc-orange);
+  border-color: var(--pwc-orange);
+}
+
+.filter-button-active:hover {
+  color: var(--pwc-white);
+  background: var(--pwc-orange-light);
+  border-color: var(--pwc-orange-light);
+}
+
+.review-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  min-width: 0;
+  margin-bottom: 24px;
+}
+
+.review-card {
+  min-width: 0;
+  padding: 24px;
+  background: var(--pwc-white);
+  border: 1px solid var(--pwc-grey-200);
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-radius: 0;
+}
+
+.review-card-correct {
+  border-left-color: var(--correct);
+}
+
+.review-card-wrong {
+  border-left-color: var(--wrong);
+}
+
+.review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.review-status {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.review-status-correct {
+  color: var(--correct);
+}
+
+.review-status-wrong {
+  color: var(--wrong);
+}
+
+.review-card-title {
+  margin-bottom: 4px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.review-card-number {
+  margin-bottom: 16px;
+  color: var(--pwc-grey-600);
+  font-size: 16px;
+}
+
+.review-card-scenario {
+  margin-bottom: 12px;
+  color: var(--pwc-grey-900);
+}
+
+.review-card-question {
+  margin-bottom: 0;
+  color: var(--pwc-grey-900);
+  font-weight: 700;
+}
+
+.review-answer {
+  min-width: 0;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 0;
+}
+
+.review-answer-correct {
+  background: var(--correct-bg);
+  border-color: var(--correct);
+}
+
+.review-answer-wrong {
+  background: var(--wrong-bg);
+  border-color: var(--wrong);
+}
+
+.review-answer-heading {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.review-answer-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.review-letter {
+  display: inline-flex;
+  flex: 0 0 28px;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--pwc-black);
+  background: var(--pwc-white);
+  border: 1px solid var(--pwc-grey-200);
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.review-option-label {
+  padding-top: 1px;
+  color: var(--pwc-grey-900);
+  font-weight: 700;
+}
+
+.review-option-code {
+  margin: 12px 0 0;
+}
+
+.review-no-answer {
+  margin: 16px 0 0;
+  color: var(--pwc-grey-600);
+}
+
+.review-correct-note {
+  margin: 12px 0 0;
+  color: var(--correct);
+  font-weight: 700;
+}
+
+.review-why {
+  min-width: 0;
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--pwc-white);
+  border: 1px solid var(--pwc-grey-200);
+  border-left: 4px solid var(--pwc-orange);
+  border-radius: 0;
+}
+
+.review-why h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.review-why p {
+  margin-bottom: 0;
+  color: var(--pwc-grey-900);
+}
+
+.review-empty {
+  margin: 0 0 24px;
+  color: var(--pwc-grey-900);
+}
+
+.review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -516,6 +765,22 @@ button {
   }
 
   .explanation {
+    padding: 16px;
+  }
+
+  .results-actions,
+  .review-actions,
+  .review-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .review-heading,
+  .review-card-title {
+    font-size: 22px;
+  }
+
+  .review-card {
     padding: 16px;
   }
 }
