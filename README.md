@@ -27,7 +27,7 @@ npm run preview
 
 ## Assumptions
 
-- The attendee name is optional, is only used for display on the results screen, and is never stored or sent anywhere.
+- No personal data is collected; the exercise has no name field.
 - Progress and answers live only in React state. Refreshing the page resets the exercise.
 - Each challenge is answered once and then locked; there is no back navigation.
 - Scoring is one point per challenge, with no partial credit. Every challenge has exactly one correct option.

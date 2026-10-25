@@ -11,7 +11,6 @@ function scoreMessage(score: number): string {
 
 function App() {
   const [screen, setScreen] = useState<Screen>("start");
-  const [name, setName] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [answered, setAnswered] = useState(false);
@@ -46,7 +45,6 @@ function App() {
   }
 
   function tryAgain() {
-    setName("");
     setCurrentIndex(0);
     setAnswers({});
     setAnswered(false);
@@ -54,169 +52,174 @@ function App() {
   }
 
   return (
-    <main className="app-shell">
-      <div className="container">
-        {screen === "start" && (
-          <section className="card start-card">
-            <h1>Design Patterns Exercise</h1>
-            <p className="tagline">
-              8 challenges - about 10 minutes - choose the best answer
-            </p>
-            <form
-              className="start-form"
-              onSubmit={(event) => {
-                event.preventDefault();
-                startExercise();
-              }}
-            >
-              <label htmlFor="attendee-name">Name (optional)</label>
-              <input
-                id="attendee-name"
-                type="text"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                placeholder="Your name"
-                autoComplete="name"
-              />
-              <button className="primary-button" type="submit">
+    <>
+      <header className="site-header">
+        <div className="header-inner">
+          <span className="header-title">Design Patterns Exercise</span>
+          <span className="header-session">Knowledge Transfer Session</span>
+        </div>
+      </header>
+
+      <main className="app-shell">
+        <div className="container">
+          {screen === "start" && (
+            <section className="card start-card">
+              <h1>Design Patterns Exercise</h1>
+              <p className="start-subtitle">
+                Test your knowledge of GoF design patterns in a realistic
+                payment system.
+              </p>
+              <ul className="start-list">
+                <li>8 challenges</li>
+                <li>About 10 minutes</li>
+                <li>Choose the best answer</li>
+              </ul>
+              <button
+                className="primary-button start-button"
+                type="button"
+                onClick={startExercise}
+              >
                 Start
               </button>
-            </form>
-          </section>
-        )}
+            </section>
+          )}
 
-        {screen === "quiz" && (
-          <section className="quiz">
-            <div className="progress-block">
-              <p className="progress-label">
-                Challenge {currentIndex + 1} of {total}
-              </p>
-              <div
-                className="progress-track"
-                role="progressbar"
-                aria-label="Exercise progress"
-                aria-valuemin={1}
-                aria-valuemax={total}
-                aria-valuenow={currentIndex + 1}
-              >
+          {screen === "quiz" && (
+            <section className="card quiz">
+              <div className="progress-block">
+                <p className="progress-label">
+                  Challenge {currentIndex + 1} of {total}
+                </p>
                 <div
-                  className="progress-fill"
-                  style={{ width: `${((currentIndex + 1) / total) * 100}%` }}
-                />
-              </div>
-            </div>
-
-            <span
-              className={`category-badge badge-${challenge.patternCategory.toLowerCase()}`}
-            >
-              {challenge.patternCategory}
-            </span>
-
-            <h2 className="challenge-title">{challenge.title}</h2>
-            <p className="scenario">{challenge.scenario}</p>
-
-            <pre className="code-block">
-              <code>{challenge.badCode}</code>
-            </pre>
-
-            <h3 className="question">{challenge.question}</h3>
-
-            <div className="options">
-              {challenge.options.map((option) => {
-                const isChosen = option.id === chosenOptionId;
-                const isCorrectOption =
-                  option.id === challenge.correctOptionId;
-                let stateClass = "";
-                if (answered && isCorrectOption) stateClass = " option-correct";
-                else if (answered && isChosen) stateClass = " option-wrong";
-
-                return (
-                  <button
-                    key={option.id}
-                    type="button"
-                    className={`option-card${stateClass}`}
-                    onClick={() => selectOption(option.id)}
-                    disabled={answered}
-                    aria-pressed={isChosen}
-                  >
-                    <span className="option-label">{option.label}</span>
-                    {option.code && (
-                      <pre className="code-block option-code">
-                        <code>{option.code}</code>
-                      </pre>
-                    )}
-                    {answered && isCorrectOption && (
-                      <span className="option-tag correct-tag">
-                        Correct answer
-                      </span>
-                    )}
-                    {answered && isChosen && !isCorrectOption && (
-                      <span className="option-tag wrong-tag">Your answer</span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {answered && (
-              <div className="explanation" aria-live="polite">
-                <h3>Explanation</h3>
-                <p>{challenge.explanation}</p>
-                <button
-                  className="primary-button"
-                  type="button"
-                  onClick={goNext}
+                  className="progress-track"
+                  role="progressbar"
+                  aria-label="Exercise progress"
+                  aria-valuemin={1}
+                  aria-valuemax={total}
+                  aria-valuenow={currentIndex + 1}
                 >
-                  {currentIndex === total - 1 ? "See results" : "Next"}
-                </button>
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${((currentIndex + 1) / total) * 100}%` }}
+                  />
+                </div>
               </div>
-            )}
-          </section>
-        )}
 
-        {screen === "results" && (
-          <section className="card results-card">
-            <p className="results-label">Results</p>
-            {name.trim() && (
-              <p className="results-name">Attendee: {name.trim()}</p>
-            )}
-            <p className="score">
-              {score} / {total}
-            </p>
-            <p className="score-message">{scoreMessage(score)}</p>
+              <span className="category-badge">
+                {challenge.patternCategory}
+              </span>
 
-            <ul className="results-list">
-              {challenges.map((item) => {
-                const correct =
-                  answers[item.id] === item.correctOptionId;
-                return (
-                  <li
-                    key={item.id}
-                    className={correct ? "result-correct" : "result-wrong"}
+              <h2 className="challenge-title">{challenge.title}</h2>
+              <p className="scenario">{challenge.scenario}</p>
+
+              <pre className="code-block">
+                <code>{challenge.badCode}</code>
+              </pre>
+
+              <h3 className="question">{challenge.question}</h3>
+
+              <div className="options">
+                {challenge.options.map((option, index) => {
+                  const isChosen = option.id === chosenOptionId;
+                  const isCorrectOption =
+                    option.id === challenge.correctOptionId;
+                  let stateClass = "";
+                  if (answered && isCorrectOption)
+                    stateClass = " option-correct";
+                  else if (answered && isChosen) stateClass = " option-wrong";
+
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      className={`option-card${stateClass}`}
+                      onClick={() => selectOption(option.id)}
+                      disabled={answered}
+                      aria-pressed={isChosen}
+                    >
+                      <span className="option-letter" aria-hidden="true">
+                        {String.fromCharCode(65 + index)}
+                      </span>
+                      <span className="option-content">
+                        <span className="option-label">{option.label}</span>
+                        {option.code && (
+                          <pre className="code-block option-code">
+                            <code>{option.code}</code>
+                          </pre>
+                        )}
+                        {answered && isCorrectOption && (
+                          <span className="option-tag correct-tag">
+                            Correct answer
+                          </span>
+                        )}
+                        {answered && isChosen && !isCorrectOption && (
+                          <span className="option-tag wrong-tag">
+                            Your answer
+                          </span>
+                        )}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {answered && (
+                <div className="explanation" aria-live="polite">
+                  <h3>Why</h3>
+                  <p>{challenge.explanation}</p>
+                  <button
+                    className="primary-button next-button"
+                    type="button"
+                    onClick={goNext}
                   >
-                    <span className="result-icon" aria-hidden="true">
-                      {correct ? "✓" : "✗"}
-                    </span>
-                    <span className="sr-only">
-                      {correct ? "Correct" : "Incorrect"}:{" "}
-                    </span>
-                    <span className="result-title">{item.title}</span>
-                  </li>
-                );
-              })}
-            </ul>
+                    {currentIndex === total - 1 ? "See results" : "Next"}
+                  </button>
+                </div>
+              )}
+            </section>
+          )}
 
-            <button
-              className="primary-button"
-              type="button"
-              onClick={tryAgain}
-            >
-              Try again
-            </button>
-          </section>
-        )}
-      </div>
-    </main>
+          {screen === "results" && (
+            <section className="card results-card">
+              <h1 className="results-heading">Results</h1>
+              <p className="score">
+                {score} / {total}
+              </p>
+              <p className="score-message">{scoreMessage(score)}</p>
+
+              <ul className="results-list">
+                {challenges.map((item) => {
+                  const correct =
+                    answers[item.id] === item.correctOptionId;
+                  return (
+                    <li
+                      key={item.id}
+                      className={correct ? "result-correct" : "result-wrong"}
+                    >
+                      <span className="result-icon" aria-hidden="true">
+                        {correct ? "✓" : "✗"}
+                      </span>
+                      <span className="sr-only">
+                        {correct ? "Correct" : "Incorrect"}:{" "}
+                      </span>
+                      <span className="result-title">{item.title}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <button
+                className="outlined-button"
+                type="button"
+                onClick={tryAgain}
+              >
+                Try again
+              </button>
+            </section>
+          )}
+        </div>
+      </main>
+    </>
   );
 }
 
